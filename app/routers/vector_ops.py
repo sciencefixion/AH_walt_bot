@@ -48,26 +48,26 @@ async def ingest_raw_text(request:IngestTextRequest):
     return {"ingested_chunks":count}
 
 # Endpoint with LLM-powered response that uses the freewriting collection
-# @router.post("/search-text")
-# async def search_text(request:SearchRequest):
-#
-#     # extract results from vector DB
-#     result = search(request.query, request.k, collection="freewriting")
-#
-#     # Quick prompt that tells the LLM the returned results
-#     # and asks for it to answer the user based on those results
-#     prompt = (
-#         f"Based on the following extracted info from the freewriting sample,"
-#         f"Answer the user's query to the best of your ability."
-#         f"If there's no relevant information stored, you can say that."
-#         f"Extracted info: {result}"
-#         f"User query: {request.query}"
-#     )
+@router.post("/search-text")
+async def search_text(request:SearchRequest):
+
+    # extract results from vector DB
+    result = search(request.query, request.k, collection="freewriting")
+
+    # Quick prompt that tells the LLM the returned results
+    # and asks for it to answer the user based on those results
+    prompt = (
+        f"Based on the following extracted info from the freewriting sample,"
+        f"Answer the user's query to the best of your ability."
+        f"If there's no relevant information stored, you can say that."
+        f"Extracted info: {result}"
+        f"User query: {request.query}"
+    )
 
 
-# TODO: HOW should langgraph come in here? and also below \/
+# TODO: HOW should langgraph come in here?
 
-#     return chain.invoke({"input":prompt})
+    return chain.invoke({"input":prompt})
 
 
 # Endpoint tha uses NER to extract entities from the "freewriting" collection
