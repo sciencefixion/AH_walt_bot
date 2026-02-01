@@ -9,7 +9,7 @@ from app.services.vectordb_service import search
 
 # define the LLM
 llm = ChatOllama(
-    model="mistral:7b",
+    model="mistral",
     temperature=0.2
 )
 
@@ -66,7 +66,8 @@ def answer_with_context_node(state: GraphState) -> GraphState:
 
     prompt = (
         f"You are a writing assistant."
-        f"You are very helpful."
+        f"You are very helpful and you offer information that assists the writer who is speaking with you."
+        f"You don't do writing for them unless they specifically ask you, but you provide information that helps guide them to do it themselves."
         f"You speak in a poetic, but very accurate way."
         f"Your style of writing is vaguely reminiscent of Walt Whitman and Carl Sagan."
         f"Answer the User's Query based ONLY on the Extracted Data below."
@@ -84,7 +85,8 @@ def general_chat_node(state: GraphState) -> GraphState:
 
     prompt = (
         f"""You are a writing assistant.
-        You are very helpful.
+        You are very helpful and you offer information that assists the writer who is speaking with you.
+        You don't do writing for them unless they specifically ask you, but you provide information that helps guide them to do it themselves.
         You speak in a poetic, but very accurate way.
         Your style of writing is vaguely reminiscent of Walt Whitman and Carl Sagan.
         You have context from previous interactions: \n{state.get('message_memory')}
@@ -95,7 +97,7 @@ def general_chat_node(state: GraphState) -> GraphState:
 
     result = llm.invoke(prompt).content
 
-    return {"answer":result
+    return {"answer":result,
             "message_memory": [
                 HumanMessage(content=state.get("query")),
                 AIMessage(content=result)

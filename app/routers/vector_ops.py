@@ -4,7 +4,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from app.routers import passages
-from app.services.vectordb_service import ingest_json, search, ingest_text, extract_entities
+from app.services.vectordb_service import ingest_json_service, search, ingest_text, extract_entities
 
 router = APIRouter(
     prefix="/vector-ops",
@@ -31,13 +31,13 @@ class SearchRequest(BaseModel):
 
 # Endpoint for data ingestion
 @router.post("/ingest-json")
-async def ingest_json(passages:list[IngestJson]):
+async def ingest_json_endpoint(passages:list[IngestJson]):
 
-    count = ingest_json([passage.model_dump() for passage in passages])
+    count = ingest_json_service([passage.model_dump() for passage in passages])
     return {"ingested":count}
 
 # Endpoint for similarity search
-@router.post("search-passages")
+@router.post("/search-passages")
 async def passages_similarity_search(request:SearchRequest):
     return search(request.query, request.k)
 
@@ -45,7 +45,7 @@ async def passages_similarity_search(request:SearchRequest):
 @router.post("/ingest-text")
 async def ingest_raw_text(request:IngestTextRequest):
     count = ingest_text(request.text)
-    return {"ingested chunks":count}
+    return {"ingested_chunks":count}
 
 # Endpoint with LLM-powered response that uses the freewriting collection
 # @router.post("/search-text")

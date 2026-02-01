@@ -3,7 +3,7 @@ from typing import Any
 
 import spacy
 from langchain_chroma import Chroma
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain_ollama import OllamaEmbeddings
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -28,11 +28,15 @@ def get_vector_store(collection:str = COLLECTION) -> Chroma:
     return vector_store[collection]
 
 
-def ingest_json(passages: list[dict[str, Any]], collection:str = COLLECTION) -> int:
+def ingest_json_service(passages: list[dict[str, Any]], collection:str = COLLECTION) -> int:
 
     db_instance = get_vector_store(collection)
     docs = [
-        Document(page_content=passage["text"], metadata=passage.get("metadata", {}))
+        Document(
+            page_content=passage["text"],
+            metadata=passage.get("metadata") or {}
+        )
+        for passage in passages
     ]
     ids = [passage["id"] for passage in passages]
 
@@ -69,7 +73,7 @@ def ingest_text(text:str) -> int:
             }
         })
 
-    return ingest_json(passages, collection="freewriting")
+    return ingest_json_service(passages, collection="freewriting")
 
 def search(query: str, k: int = 10, collection:str = COLLECTION) -> list[dict[str, Any]]:
 
