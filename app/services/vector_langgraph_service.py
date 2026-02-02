@@ -5,6 +5,7 @@ from langgraph.graph import StateGraph, END
 
 from app.services.vectordb_service import search
 
+
 # Define the LLM
 llm = ChatOllama(
     model="mistral",
@@ -15,6 +16,14 @@ class SearchTextState(TypedDict, total=False):
     query: str
     k: int
     docs: list[dict[str, Any]]
+    answer: str
+
+class NERSearchState(TypedDict, total=False):
+    query: str
+    k: int
+    passages: list
+    combined_text: str
+    entities: dict
     answer: str
 
 # =========NODE DEFINITIONS=========
@@ -53,6 +62,44 @@ def generate_answer_node(state: SearchTextState) -> SearchTextState:
 
     return {"answer": answer}
 
+# NER node definitions
+def retrieve_passages_node(state: NERSearchState) -> NERSearchState:
+    """Retrieve passages from freewriting collection"""
+    query = state.get("query", "")
+    k = state.get("k", 3)
+    result = search(query, k=k, collection="freewriting")
+    return {"passages": result}
+
+def combine_text_node(state: NERSearchState) -> NERSearchState:
+    """Combine passage texts"""
+    passages = state.get("passages", [])
+    combined_text = "\n\n".join(passage["text"] for passage in passages)
+    return {"combined_text": combined_text}
+
+def extract_entities_node(state: NERSearchState) -> NERSearchState:
+    """Extract named entities from combined text"""
+    from app.services.vectordb_service import extract_entities
+    combined_text = state.get("combined_text", "")
+    entities = extract_entities(combined_text)
+    return {"entities": entities}
+
+def generate_ner_answer_node(state: NERSearchState) -> NERSearchState:
+    """Generate answer based on extracted entities"""
+    query = state.get("query", "")
+    entities = state.get("entities", {})
+
+    prompt = (
+        f"Based on the following extracted entities from the freewriting sample, "
+        f"{entities}\n"
+        f"Answer the User's NER-based query with ONLY the data you see here.\n"
+        f"User query: {query}"
+    )
+
+    response = llm.invoke(prompt)
+    answer = response.content if hasattr(response, 'content') else str(response)
+
+    return {"answer": answer}
+
 # ==========BUILD GRAPH==========
 
 def build_search_text_graph():
@@ -73,3 +120,26 @@ def build_search_text_graph():
 
 # Create singleton instance
 search_text_graph = build_search_text_graph()
+
+# Build NER graph
+def build_ner_search_graph():
+    """Build the LangGraph workflow for NER-based search"""
+    workflow = StateGraph(NERSearchState)
+
+    # Add nodes
+    workflow.add_node("retrieve", retrieve_passages_node)
+    workflow.add_node("combine", combine_text_node)
+    workflow.add_node("extract_entities", extract_entities_node)
+    workflow.add_node("generate", generate_ner_answer_node)
+
+    # Define flow
+    workflow.set_entry_point("retrieve")
+    workflow.add_edge("retrieve", "combine")
+    workflow.add_edge("combine", "extract_entities")
+    workflow.add_edge("extract_entities", "generate")
+    workflow.add_edge("generate", END)
+
+    return workflow.compile(checkpointer=MemorySaver())
+
+# Create singleton instance
+ner_search_graph = build_ner_search_graph()

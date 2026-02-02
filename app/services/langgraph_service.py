@@ -14,15 +14,10 @@ llm = ChatOllama(
 )
 
 class GraphState(TypedDict, total=False):
-
     query: str
-
     route: str
-
     docs: list[dict[str, Any]]
-
     answer: str
-
     message_memory: Annotated[list[BaseMessage], add_messages]
 
 # =========NODE DEFINITIONS=========

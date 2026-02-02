@@ -3,7 +3,8 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from app.services.vectordb_service import ingest_json_service, search, ingest_text, extract_entities
-from app.services.vector_langgraph_service import search_text_graph  # New import
+from app.services.vector_langgraph_service import search_text_graph, ner_search_graph
+
 
 router = APIRouter(
     prefix="/vector-ops",
@@ -61,23 +62,16 @@ async def search_text(request: SearchRequest):
     }
 
 # Endpoint tha uses NER to extract entities from the "freewriting" collection
-# @router.post("/ner-search-text")
-# async def ner_search_text(request:SearchRequest):
-#
-#     result = search(request.query, request.k, collection="freewriting")
-#
-#     combined_text = "\n\n".join(passage["text"] for passage in result)
-#
-#     entities = extract_entities(combined_text)
-#
-#     # create a new prompt for the LLM and tell it to help with classification
-#     # Another example of RAG - we're retrieving info that will augment the response
-#
-#     prompt = (
-#         f"Based on the following extracted entities from the freewriting sample,"
-#         f"{entities}\n"
-#         f"Answer the User's NER-based query with ONLY the data you see here."
-#         f"User query: {request.query}"
-#     )
-#
-#     return chain.invoke({"input":prompt})
+@router.post("/ner-search-text")
+async def ner_search_text(request: SearchRequest):
+    """LangGraph-powered NER search endpoint"""
+    result = await ner_search_graph.ainvoke(
+        {"query": request.query, "k": request.k},
+        config={"configurable": {"thread_id": "ner_search"}}
+    )
+
+    return {
+        "answer": result.get("answer"),
+        "entities": result.get("entities"),
+        "query": request.query
+    }
