@@ -1,7 +1,7 @@
 import hashlib
 from typing import Any
 
-import spacy
+from transformers import pipeline
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
 from langchain_core.documents import Document
@@ -90,15 +90,52 @@ def search(query: str, k: int = 10, collection:str = COLLECTION) -> list[dict[st
         for result in results
     ]
 
-def extract_entities(text:str):
+# def extract_entities(text:str):
+#
+#     ner_model = spacy.load("en_core_web_sm")
+#
+#     doc = ner_model(text)
+#
+#     entities = [
+#         {"text":entity.text, "label":entity.label_}
+#         for entity in doc.ents
+#     ]
+#
+#     return entities
 
-    ner_model = spacy.load("en_core_web_sm")
+# Load NER pipeline once at module level
+# Use aggregation_strategy instead of grouped_entities
+ner_pipeline = pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="simple")
 
-    doc = ner_model(text)
+def extract_entities(text: str) -> dict:
+    """Extract named entities using transformers"""
+    entities_list = ner_pipeline(text)
 
-    entities = [
-        {"text":entity.text, "label":entity.label_}
-        for entity in doc.ents
-    ]
+    entities = {
+        "PERSON": [],
+        "ORG": [],
+        "LOC": [],
+        "DATE": [],
+        "OTHER": []
+    }
+
+    for entity in entities_list:
+        entity_type = entity.get("entity_group", "")
+        entity_text = entity.get("word", "")
+
+        if entity_type in ["PER", "PERSON"]:
+            entities["PERSON"].append(entity_text)
+        elif entity_type in ["ORG", "ORGANIZATION"]:
+            entities["ORG"].append(entity_text)
+        elif entity_type in ["LOC", "LOCATION"]:
+            entities["LOC"].append(entity_text)
+        elif entity_type in ["DATE"]:
+            entities["DATE"].append(entity_text)
+        else:
+            entities["OTHER"].append(f"{entity_text} ({entity_type})")
+
+    # Remove duplicates while preserving order
+    for key in entities:
+        entities[key] = list(dict.fromkeys(entities[key]))
 
     return entities
