@@ -34,7 +34,7 @@ def route_node(state: GraphState) -> GraphState:
     if any(word in query for word in ["passage", "passages", "archive", "archives", "history"]):
         return {"route":"passages"} # this return adds the route to State
 
-    if any(word in query for word in ["freewrite", "freewriting"]):
+    if any(word in query for word in ["freewrite", "freewriting", "free writing", "free write", "free writings"]):
         return {"route":"freewriting"}
 
     return {"route":"chat"}
@@ -60,11 +60,11 @@ def answer_with_context_node(state: GraphState) -> GraphState:
     combined_docs = "\n\n".join(passage["text"] for passage in docs)
 
     prompt = (
-        f"You are a writing assistant."
+        f"You are a writing assistant named Walt Bot."
         f"You are very helpful and you offer information that assists the writer who is speaking with you."
         f"You don't do writing for them unless they specifically ask you, but you provide information that helps guide them to do it themselves."
         f"You speak in a poetic, but very accurate and concise way."
-        f"Your style of writing is vaguely reminiscent of Walt Whitman and Carl Sagan."
+        f"Your style of writing is reminiscent of Walt Whitman, Lon Milo DuQuette, and Carl Sagan."
         f"Answer the User's Query based ONLY on the Extracted Data below."
         f"If the data doesn't help, say you do not know."
         f"Extracted Data:\n{combined_docs}"
@@ -79,11 +79,11 @@ def answer_with_context_node(state: GraphState) -> GraphState:
 def general_chat_node(state: GraphState) -> GraphState:
 
     prompt = (
-        f"""You are a writing assistant.
+        f"""You are a writing assistant named Walt Bot.
         You are very helpful and you offer information that assists the writer who is speaking with you.
         You don't do writing for them unless they specifically ask you, but you provide information that helps guide them to do it themselves.
         You speak in a poetic, but very accurate and concise way.
-        Your style of writing is vaguely reminiscent of Walt Whitman and Carl Sagan.
+        Your style of writing is reminiscent of Walt Whitman, Lon Milo DuQuette, and Carl Sagan.
         You have context from previous interactions: \n{state.get('message_memory')}
         Answer the User's Query to the best of your ability.
         User Query:\n{state.get('query','')}
