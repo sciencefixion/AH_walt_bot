@@ -1,6 +1,6 @@
 from typing import Any
-from fastapi import APIRouter
-from pydantic import BaseModel
+from fastapi import APIRouter, Form
+from pydantic import BaseModel, field_validator
 
 from app.services.vectordb_service import ingest_json_service, search, ingest_text, extract_entities
 from app.services.vector_langgraph_service import search_text_graph, ner_search_graph
@@ -20,6 +20,15 @@ class IngestJson(BaseModel):
 # model for ingesting raw text
 class IngestTextRequest(BaseModel):
     text: str
+    #
+    # @field_validator('text')
+    # @classmethod
+    # def clean_text(cls, v: str) -> str:
+    #     """Clean and normalize text input"""
+    #     if not v:
+    #         raise ValueError('Text cannot be empty')
+    #     # Remove null bytes and other problematic characters
+    #     return v.replace('\x00', '').strip()
 
 # model for similarity search request results
 class SearchRequest(BaseModel):
@@ -39,8 +48,9 @@ async def passages_similarity_search(request: SearchRequest):
 
 # Endpoint for raw text ingestion
 @router.post("/ingest-text")
-async def ingest_raw_text(request: IngestTextRequest):
-    count = ingest_text(request.text)
+async def ingest_raw_text(text: str = Form(...)):
+    """Accept text as form data instead of JSON"""
+    count = ingest_text(text)
     return {"ingested_chunks": count}
 
 # LangGraph-powered endpoint with LLM response
