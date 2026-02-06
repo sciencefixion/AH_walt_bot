@@ -1,0 +1,212 @@
+[
+    {
+        "id": "1",
+        "journal_id": 1,
+        "title": "The Great Taco Betrayal",
+        "text": "Ordered soft tacos. They gave me hard shells. Ate them anyway out of principle. Stabbed the roof of my mouth 4 times. This is my villain origin story.",
+        "created_at": "2019-03-14T18:23:00"
+    },
+    {
+        "id": "2",
+        "journal_id": 1,
+        "title": "Library Fine Apocalypse",
+        "text": "Returned a library book 8 months late. Fine was $43.20. The book cost $12 new. Librarian gave me the look of profound disappointment only librarians can give.",
+        "created_at": "2019-07-22T14:37:00"
+    },
+    {
+        "id": "3",
+        "journal_id": 2,
+        "title": "Furniture Assembly Nightmare",
+        "text": "Built IKEA bookshelf. Took 5 hours. Had 3 screws left over. Bookshelf standing but I don't trust it. Named it Judas because it will betray me.",
+        "created_at": "2020-01-08T21:45:00"
+    },
+    {
+        "id": "4",
+        "journal_id": 2,
+        "title": "Houseplant Massacre",
+        "text": "Bought a cactus named Steven thinking I couldn't kill it. Steven lasted 11 days. Cause of death: overwatering. I am a plant serial killer.",
+        "created_at": "2020-05-19T10:12:00"
+    },
+    {
+        "id": "5",
+        "journal_id": 3,
+        "title": "The Zoom Mute Incident",
+        "text": "Ranted about project deadlines for 90 seconds before realizing I was on mute. Unmuted and said 'I agree' when asked my opinion. Nailed it.",
+        "created_at": "2020-09-03T15:28:00"
+    },
+    {
+        "id": "6",
+        "journal_id": 3,
+        "title": "Sourdough Starter Drama",
+        "text": "Started sourdough starter. Named her Patricia. Fed her daily for 16 days. Made bread. It was a brick. Patricia and I are no longer on speaking terms.",
+        "created_at": "2020-11-27T19:56:00"
+    },
+    {
+        "id": "7",
+        "journal_id": 1,
+        "title": "New Year's Resolution Update",
+        "text": "Resolution was to run 3 times a week. It's March. I've run 2 times total. Both times were to catch the bus. Technically counts.",
+        "created_at": "2021-03-06T08:41:00"
+    },
+    {
+        "id": "8",
+        "journal_id": 4,
+        "title": "Dating App Wilderness",
+        "text": "Matched with someone. Their bio said 'fluent in sarcasm.' Replied sarcastically. They didn't get it. Unmatched. The irony is delicious.",
+        "created_at": "2021-06-15T22:33:00"
+    },
+    {
+        "id": "9",
+        "journal_id": 4,
+        "title": "Grocery Delivery Confusion",
+        "text": "Ordered 2 bananas. Delivery gave me 2 pounds. Now I have 17 bananas. Made banana bread. Made smoothies. Still have 9 bananas. Send help.",
+        "created_at": "2021-08-29T16:07:00"
+    },
+    {
+        "id": "10",
+        "journal_id": 5,
+        "title": "The Great Laundry Disaster",
+        "text": "Washed white shirt with red sock. Shirt now pink. Wore it to work. 6 people complimented my 'bold fashion choice.' Might do this on purpose now.",
+        "created_at": "2021-12-11T09:18:00"
+    },
+    {
+        "id": "11",
+        "journal_id": 5,
+        "title": "Airport Security Theater",
+        "text": "TSA flagged my bag. Suspicious item: a 4-ounce container of hummus. Apparently hummus is a liquid now. Science has gone too far.",
+        "created_at": "2022-02-24T06:52:00"
+    },
+    {
+        "id": "12",
+        "journal_id": 2,
+        "title": "Haircut Miscommunication",
+        "text": "Asked for 2 inches off. Hairdresser took off 5 inches. I now look like a medieval pageboy. Cost $65 plus tip. I tipped her anyway because confrontation is scary.",
+        "created_at": "2022-05-07T14:29:00"
+    },
+    {
+        "id": "13",
+        "journal_id": 1,
+        "title": "Smart Home Rebellion",
+        "text": "Smart lights decided 3 AM was the perfect time for a rave. Flashed every color. Alexa laughed. Pretty sure my house is haunted by Jeff Bezos.",
+        "created_at": "2022-07-18T03:14:00"
+    },
+    {
+        "id": "14",
+        "journal_id": 3,
+        "title": "Cooking Show Delusions",
+        "text": "Watched 45 minutes of Gordon Ramsay. Attempted beef wellington. Created what can only be described as 'sad meat pocket.' Gordon would be disgusted.",
+        "created_at": "2022-10-31T20:03:00"
+    },
+    {
+        "id": "15",
+        "journal_id": 4,
+        "title": "Group Chat Chaos",
+        "text": "Accidentally sent message meant for best friend to family group chat. Message: 'his mustache looks like a caterpillar died on his face.' It was about my uncle.",
+        "created_at": "2023-01-09T11:47:00"
+    },
+    {
+        "id": "16",
+        "journal_id": 3,
+        "title": "Gym Membership Guilt",
+        "text": "Gym charged me $39.99 again. Haven't been in 7 months. Considered going. Remembered I don't know where my gym shoes are. Maybe next month.",
+        "created_at": "2023-04-03T07:21:00"
+    },
+    {
+        "id": "17",
+        "journal_id": 5,
+        "title": "Social Media Cleanse",
+        "text": "Deleted Instagram for mental health. Lasted 4 hours and 12 minutes. Redownloaded it. First post I saw was an ad. This is my personal hell.",
+        "created_at": "2023-06-28T17:54:00"
+    },
+    {
+        "id": "18",
+        "journal_id": 2,
+        "title": "Parallel Parking Trauma",
+        "text": "Attempted parallel parking on busy street. Took 8 tries. 13 cars waited. One guy got out to direct me. I waved thanks and drove away in shame.",
+        "created_at": "2023-09-14T12:38:00"
+    },
+    {
+        "id": "19",
+        "journal_id": 1,
+        "title": "Coffee Shop Name Saga",
+        "text": "Barista asked my name. Said Jessica. She wrote Jassicka. I didn't correct her. That's my name now. Hello I'm Jassicka.",
+        "created_at": "2023-11-02T08:09:00"
+    },
+    {
+        "id": "20",
+        "journal_id": 4,
+        "title": "Tax Season Breakdown",
+        "text": "Did my taxes. Found receipts from 2019. One was for $3.47 at a gas station. Kept it because maybe I'll need it. I will never need it.",
+        "created_at": "2024-02-18T22:16:00"
+    },
+    {
+        "id": "21",
+        "journal_id": 5,
+        "title": "Plant Parent Success",
+        "text": "Kept a fern alive for 3 months. This is unprecedented. Named him Fernando. We're best friends now. I talk to Fernando about my problems.",
+        "created_at": "2024-04-25T19:42:00"
+    },
+    {
+        "id": "22",
+        "journal_id": 3,
+        "title": "Autocorrect Nightmare",
+        "text": "Texted boss 'I'll have that ready for you' but autocorrect changed it to 'I'll have that baby for you.' She didn't respond for 6 hours. Neither did I.",
+        "created_at": "2024-07-09T13:55:00"
+    },
+    {
+        "id": "23",
+        "journal_id": 2,
+        "title": "Movie Theater Economics",
+        "text": "Paid $18 for movie ticket. Paid $23 for popcorn and soda. Popcorn was stale. Movie was bad. This is why people pirate content.",
+        "created_at": "2024-09-21T21:27:00"
+    },
+    {
+        "id": "24",
+        "journal_id": 1,
+        "title": "Sleep Schedule Anarchy",
+        "text": "Went to bed at 9 PM to fix sleep schedule. Woke up at 11 PM. Now it's 4 AM and I've watched 11 YouTube videos about submarines. I've learned nothing.",
+        "created_at": "2024-11-08T04:03:00"
+    },
+    {
+        "id": "25",
+        "journal_id": 4,
+        "title": "Online Shopping Regret",
+        "text": "Bought 'as seen on TV' gadget at 2 AM. It arrived. It's garbage. Spent $29.99. Watched infomercial again. Still seems amazing. I'm the problem.",
+        "created_at": "2025-01-14T15:31:00"
+    },
+    {
+        "id": "26",
+        "journal_id": 5,
+        "title": "Neighborhood Watch Drama",
+        "text": "Nextdoor app claims there's a 'suspicious person' in neighborhood. It's the mailman. Same mailman for 5 years. Karen posted his picture. I hate it here.",
+        "created_at": "2025-03-29T10:48:00"
+    },
+    {
+        "id": "27",
+        "journal_id": 3,
+        "title": "Thrift Store Treasure",
+        "text": "Found vintage leather jacket at thrift store for $12. Wore it out. Friend said it smells like grandpa. She's right. I'm keeping it. Grandpa chic is in.",
+        "created_at": "2025-05-16T18:24:00"
+    },
+    {
+        "id": "28",
+        "journal_id": 1,
+        "title": "Pet Naming Crisis",
+        "text": "Adopted goldfish. Couldn't decide on name. Asked Twitter. Got 247 suggestions. Named him Mr. Fish. I lack creativity and I'm okay with that.",
+        "created_at": "2025-07-04T14:11:00"
+    },
+    {
+        "id": "29",
+        "journal_id": 2,
+        "title": "Road Rage Revelation",
+        "text": "Guy cut me off in traffic. I was furious. Followed him for 3 blocks. He pulled into my apartment complex. He's my neighbor Dave. We waved awkwardly.",
+        "created_at": "2025-10-22T17:38:00"
+    },
+    {
+        "id": "30",
+        "journal_id": 4,
+        "title": "Holiday Card Pressure",
+        "text": "Everyone sending holiday cards with professional family photos. I'm sending cards with my dog wearing a hat. This is my contribution to society.",
+        "created_at": "2025-12-19T20:57:00"
+    }
+]
